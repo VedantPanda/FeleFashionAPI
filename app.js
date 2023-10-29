@@ -1,10 +1,13 @@
+require("dotenv").config();
+
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const productRoutes = require('./routes/products');
 const bodyParser = require('body-parser');
+const PORT = process.env.PORT || 3000;
 
-mongoose.connect('mongodb://127.0.0.1:27017/FeleFashions',{
+mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser:true,
     useUnifiedTopology:true
 });
@@ -19,6 +22,6 @@ app.use(bodyParser.json());
 
 app.use("/api/product",productRoutes);
 
-app.listen(3000,()=>{
+app.listen(PORT,()=>{
     console.log("Server started!");
 });

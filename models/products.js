@@ -37,14 +37,11 @@ productSchema.virtual('category', {
 
 productSchema.pre('save',async function(next){
     try{
-        console.log("Heehehhehehe");
         const totalProducts = await Product.countDocuments();
-        console.log(totalProducts);
         this.productId = totalProducts+1;
         next();
     }
     catch(err){
-        console.error("Error counting products:",err);
         next(err);
     }
 })
